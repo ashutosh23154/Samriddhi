@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SHG Registration</title>
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="signup.css" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+    />
+
+</head>
+<body>
+  <!-- Top Navbar -->
+  <nav>
+    <a href="mainPage.html" class="logo">समृद्धि</a>
+        <ul class="nav-links">
+      <li><a href="mainPage.html">Home</a></li>
+      <li><a href="#">Features</a></li>
+      <li><a href="#">View Transactions</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Wrapper for the Image (Left) and Form (Right) -->
+   <div id="latitude" style="display: none;"></div>
+   <div id="longitude" style="display: none;"></div>
+  <div class="wrapper">
+    <!-- Left Column: Image -->
+    <div class="left-col">
+      <!-- Option A: Background image via CSS (see style.css) 
+           Option B: Direct <img> tag, shown below. -->
+      <img src="image/i6.png" alt="SHG illustration" />
+    </div>
+
+    <!-- Right Column: Registration Form -->
+    <div class="right-col">
+      <div class="form-container">
+        <!-- Optional brand logo/title inside form -->
+        <h2 class="brand-logo">समृद्धि</h2>
+        <div id="map"></div>
+
+        <form id="shg-form" onsubmit="handleSubmit(event)">
+          <h3>Basic Information</h3>
+          <div class="form-row">
+            <div class="input-group">
+              <label for="shg-name">SHG Name</label>
+              <input
+                type="text"
+                id="shg-name"
+                placeholder="Enter SHG Name"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="leader-name">SHG Leader’s Name</label>
+              <input
+                type="text"
+                id="leader-name"
+                placeholder="Enter Leader’s Name"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="input-group">
+              <label for="contact-number">Contact Number</label>
+              <input
+                type="tel"
+                id="contact-number"
+                placeholder="WhatsApp Enabled Number"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="email">Email ID (Optional)</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter Email (Optional)"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="input-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter Password"
+                required
+              />
+            </div>
+            <div class="input-group">
+                <label for="password">Confirm Password</label>
+                <input
+                  type="password"
+                  id="confirm-password"
+                  placeholder="Enter Password"
+                  required
+                />
+              </div>
+          </div>
+
+          <h3>Financial &amp; Business Information</h3>
+          <div class="form-row">
+            <div class="input-group">
+              <label for="business-type">Type of Business</label>
+              <select id="business-type" required>
+                <option value="">Select Business Type</option>
+                <option value="Agriculture">Agriculture</option>
+                <option value="Handicrafts">Handicrafts</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Textiles">Textiles</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label for="members-count">Number of Members</label>
+              <input
+                type="number"
+                id="members-count"
+                placeholder="Enter Number of Members"
+                required
+                min="1"
+              />
+            </div>
+          </div>
+          
+          <button type="submit" onclick="window.location.replace = 'login.html'">Register SHG</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      
+      // Collect form data
+      const userData = {
+        shgName: document.getElementById('shg-name').value,
+        leaderName: document.getElementById('leader-name').value,
+        phone: document.getElementById('contact-number').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        businessType: document.getElementById('business-type').value,
+        membersCount: document.getElementById('members-count').value
+      };
+
+      // Store in localStorage
+      localStorage.setItem('users', JSON.stringify([
+        ...(JSON.parse(localStorage.getItem('users')) || []),
+        userData
+      ]));
+
+      // Store current user
+      localStorage.setItem('currentUser', JSON.stringify(userData));
+
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+></script>
+<script src="signup.js"></script>
+</html>

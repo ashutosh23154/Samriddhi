@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Selected Applicants - SHG</title>
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="signup.css" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Full-width layout */
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem;
+      min-height: calc(100vh - 60px); /* Subtract navbar height */
+    }
+
+    /* Selected Applicants List Grid Layout */
+    #selected-applicants-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1200px; /* Adjust max-width as needed */
+    }
+
+    .applicant-card {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .applicant-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .applicant-card h3 {
+      font-size: 1.5rem;
+      color: #6a0dad;
+      margin-bottom: 1rem;
+    }
+
+    .applicant-card p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+
+    .applicant-card p strong {
+      color: #333;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      #selected-applicants-list {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+      }
+    }
+
+    @media (max-width: 576px) {
+      #selected-applicants-list {
+        grid-template-columns: 1fr; /* 1 column for small screens */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navbar -->
+  <nav>
+    <div class="logo">समृद्धि</div>
+    <ul class="nav-links">
+      <li><a href="mainPage2.html">Home</a></li>
+      <li><a href="borrower.html">Borrower List</a></li>
+      <li><a href="applicants.html">View Applicants</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Wrapper -->
+  <div class="wrapper">
+    <!-- Selected Applicants List -->
+    <div class="form-container" style="width: 100%; max-width: 1200px;">
+      <h2 class="brand-logo">Selected Applicants</h2>
+
+      <!-- Selected Applicants List -->
+      <div id="selected-applicants-list"></div>
+    </div>
+  </div>
+
+  <!-- Link to JavaScript -->
+  <script src="selected-applicants.js"></script>
+</body>
+</html>

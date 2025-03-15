@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - SHG</title>
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="signup.css" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    .notification {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        border-radius: 5px;
+        color: white;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .error {
+        background-color: #dc3545;
+        box-shadow: 0 2px 5px rgba(220, 53, 69, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navbar -->
+  <nav>
+    <div class="logo">समृद्धि</div>
+    <ul class="nav-links">
+      <li><a href="mainPage2.html">Home</a></li>
+      <li><a href="#">Features</a></li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Wrapper for the Image (Left) and Form (Right) -->
+  <div class="wrapper">
+    <!-- Left Column: Image -->
+    <div class="left-col">
+      <img src="image/i6.png" alt="SHG illustration" />
+    </div>
+
+    <!-- Right Column: Login Form -->
+    <div class="right-col">
+      <div class="form-container" style="width: 500px;">
+        <h2 class="brand-logo">समृद्धि</h2>
+
+        <form id="login-form" onsubmit="handleLogin(event)">
+          <h3>Login</h3>
+
+          <!-- Phone Number Input -->
+          <div class="form-row">
+            <div class="input-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                placeholder="Enter Phone Number"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Password Input -->
+          <div class="form-row">
+            <div class="input-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter Password"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit">Login</button>
+
+          <!-- Link to Registration Page -->
+          <p class="register-link" style="margin-top: 15px;">
+            Don't have an account? <a href="signup.html">Register here</a>.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Link to JavaScript -->
+  <script src="login.js"></script>
+  <script>
+    function handleLogin(event) {
+      event.preventDefault();
+      const phone = document.getElementById('phone').value;
+      const password = document.getElementById('password').value;
+
+      // Get users from localStorage
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const user = users.find(u => u.phone === phone && u.password === password);
+
+      if (user) {
+        // Store current user
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        window.location.href = 'mainPage2.html';
+      } else {
+        showError('Invalid phone number or password');
+      }
+    }
+
+    function showError(message) {
+      const notification = document.getElementById('error-notification');
+      notification.textContent = message;
+      notification.style.opacity = '1';
+
+      setTimeout(() => {
+        notification.style.opacity = '0';
+      }, 3000);
+    }
+
+    // Check if user is already logged in
+    document.addEventListener('DOMContentLoaded', function() {
+      if (localStorage.getItem('currentUser')) {
+        window.location.href = 'mainPage2.html';
+      }
+    });
+  </script>
+  <div id="error-notification" class="notification error"></div>
+</body>
+</html>

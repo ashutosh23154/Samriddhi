@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Transactions</title>
+    <link rel="stylesheet" href="signup.css">
+    <style>
+        .transactions-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #6a0dad;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .filters {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .filters select, .filters input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .no-transactions {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .add-transaction-btn {
+            background-color: #6a0dad;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .add-transaction-btn:hover {
+            background-color: #5a0da0;
+        }
+
+        .amount-spent {
+            color: #dc3545;
+        }
+
+        .amount-gained {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navbar -->
+    <nav>
+        <div class="logo">समृद्धि</div>
+        <ul class="nav-links">
+            <li><a href="mainPage2.html">Home</a></li>
+            <li><a href="log_transactions.html">Add Transaction</a></li>
+            <li><a href="applicants.html">Applicants </a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="transactions-container">
+        <h2>Transaction History</h2>
+        <button class="add-transaction-btn" onclick="window.location.href='log_transactions.html'">
+            Add New Transaction
+        </button>
+        
+        <div class="filters">
+            <select id="typeFilter">
+                <option value="">All Types</option>
+                <option value="Income">Income</option>
+                <option value="Expense">Expense</option>
+                <option value="Savings">Savings</option>
+                <option value="Loan">Loan</option>
+                <option value="Transfer">Transfer</option>
+            </select>
+            <select id="natureFilter">
+                <option value="">All Nature</option>
+                <option value="spent">Money Out</option>
+                <option value="gained">Money In</option>
+            </select>
+            <input type="date" id="dateFilter" placeholder="Filter by date">
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Transaction ID</th>
+                    <th>Type</th>
+                    <th>Nature</th>
+                    <th>Amount</th>
+                    <th>Payment Mode</th>
+                    <th>Counterparty</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody id="transactionsBody">
+                <!-- Transactions will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function loadTransactions() {
+            const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+            displayTransactions(transactions);
+        }
+
+        function displayTransactions(transactions) {
+            const tbody = document.getElementById("transactionsBody");
+            tbody.innerHTML = '';
+
+            if (!transactions || transactions.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="no-transactions">No transactions found. Add your first transaction!</td></tr>`;
+                return;
+            }
+
+            transactions.forEach(transaction => {
+                const row = document.createElement('tr');
+                const amountClass = transaction.nature === 'spent' ? 'amount-spent' : 'amount-gained';
+                const amountPrefix = transaction.nature === 'spent' ? '-' : '+';
+                
+                row.innerHTML = `
+                    <td>${new Date(transaction.date).toLocaleDateString()}</td>
+                    <td>${transaction.transactionId}</td>
+                    <td>${transaction.type}</td>
+                    <td>${transaction.nature}</td>
+                    <td class="${amountClass}">${amountPrefix}₹${transaction.amount}</td>
+                    <td>${transaction.paymentMode}</td>
+                    <td>${transaction.counterparty}</td>
+                    <td>${transaction.description || '-'}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function filterTransactions() {
+            const typeFilter = document.getElementById('typeFilter').value;
+            const natureFilter = document.getElementById('natureFilter').value;
+            const dateFilter = document.getElementById('dateFilter').value;
+            
+            let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+            
+            // Apply filters
+            transactions = transactions.filter(transaction => {
+                const matchesType = !typeFilter || transaction.type === typeFilter;
+                const matchesNature = !natureFilter || transaction.nature === natureFilter;
+                const matchesDate = !dateFilter || transaction.date === dateFilter;
+                return matchesType && matchesNature && matchesDate;
+            });
+
+            displayTransactions(transactions);
+        }
+
+        // Load transactions when page loads
+        document.addEventListener('DOMContentLoaded', loadTransactions);
+
+        // Add event listeners for filters
+        document.getElementById('typeFilter').addEventListener('change', filterTransactions);
+        document.getElementById('natureFilter').addEventListener('change', filterTransactions);
+        document.getElementById('dateFilter').addEventListener('change', filterTransactions);
+    </script>
+</body>
+</html>

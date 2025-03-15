@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile - SHG</title>
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="signup.css" />
+  <style>
+    
+  </style>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <!-- Top Navbar -->
+  <nav>
+    <div class="logo">समृद्धि</div>
+    <ul class="nav-links">
+      <li><a href="mainPage2.html">Home</a></li>
+      <li><a href="lender.html">Lenders List</a></li>
+      <li><a href="borrower.html">Borrowers List</a></li>
+      <li><a href="contact.html"">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Wrapper for the Profile -->
+  <div class="wrapper">
+    <!-- Left Column: Image -->
+    <div class="left-col">
+      <img src="image/i6.png" alt="SHG illustration" />
+    </div>
+
+    <!-- Right Column: Profile Information -->
+    <div class="right-col">
+      <div class="form-container">
+        <h2 class="brand-logo" style="font-size: 55px;">Profile</h2>
+
+        <!-- Display User Information -->
+        <div id="user-info">
+          <h3 style="display: flex; justify-content: center; margin-bottom: 10px;">Basic Information</h3>
+          <p><strong>SHG Name:</strong> <span id="shg-name" style="margin-left: 120px;"></span></p>
+          <p><strong>Leader’s Name:</strong> <span id="leader-name" style="margin-left: 83px;"></span></p>
+          <p><strong>Contact Number:</strong> <span id="contact-number" style="margin-left: 68px;"></span></p>
+          <p><strong>Email:</strong> <span id="email" style="margin-left: 157px;"></span></p>
+          <p><strong>Business Type:</strong> <span id="business-type" style="margin-left: 85px;"></span></p>
+          <p><strong>Number of Members:</strong> <span id="members-count" style="margin-left: 33px;"></span></p>
+          <!-- Add these two lines -->
+          <p><strong>Current Status:</strong> <span id="lend-borrow-status" style="margin-left: 85px;"></span></p>
+          <p><strong>Current Amount:</strong> <span id="lend-borrow-amount" style="margin-left: 68px;"></span></p>
+        </div>
+
+        <!-- Lend/Borrow Section -->
+        <form id="lend-borrow-form">
+          <h3 style="margin-top: 20px;">Lend or Borrow</h3>
+          <div class="form-row">
+            <div class="input-group">
+              <label for="lend-borrow">Choose Action</label>
+              <select id="lend-borrow" required>
+                <option value="">Select</option>
+                <option value="lend">Lend</option>
+                <option value="borrow">Borrow</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label for="amount">Amount (₹)</label>
+              <input type="number" id="amount" placeholder="Enter Amount" required min="0" />
+            </div>
+          </div>
+
+          <!-- Add this right before the closing form tag -->
+          <div style="display: flex; justify-content: space-between; margin-top: 20px; gap:35px;">
+            <button type="submit" id="saveButton">Save</button>
+            <button type="button" onclick="signOut()" style="background-color: #dc3545;">Sign Out</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Link to JavaScript -->
+  <script src="profile.js"></script>
+  <script>
+    function signOut() {
+      // Clear user data from localStorage
+      localStorage.removeItem('loggedInUser');
+      // Redirect to main page
+      window.location.href = 'mainPage.html';
+    }
+  </script>
+</body>
+
+</html>

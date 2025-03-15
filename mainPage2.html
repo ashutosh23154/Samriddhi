@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHG Platform - Empowering Rural Businesses</title>
+    <link rel="stylesheet" href="mainPage.css">
+
+    <style>
+        /* Chatbot Icon */
+        .chatbot-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #6a0dad;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .chatbot-icon:hover {
+            background-color: #5a0da0;
+        }
+
+        .chatbot-icon img {
+            width: 55px;
+            height: 55px;
+        }
+
+        /* Chatbot Window */
+        .chatbot-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background-color: #6a0dad;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .chatbot-body {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 14px;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            background: #f8f8f8;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .chatbot-input button {
+            background-color: #6a0dad;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            margin-left: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .chatbot-input button:hover {
+            background-color: #5a0da0;
+        }
+
+        /* Close button styles */
+        .close-button {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .close-button:hover {
+            color: #ddd;
+        }
+
+        /* Microphone animation styles */
+        .mic-animation {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background: rgba(106, 13, 173, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            z-index: 1000;
+        }
+
+        .mic-wave {
+            width: 50px;
+            height: 50px;
+            border: 3px solid white;
+            border-radius: 50%;
+            animation: wave 1.5s infinite;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        #mic-button img {
+            filter: brightness(0) invert(1);
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav>
+        <a href="mainPage2.html" class="logo">समृद्धि</a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="lender_buyer.html">Lenders/Borrowers</a></li>
+            <li><a href="applicants.html">View Applicants</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div style="display: flex; gap: 10px;">
+            <button class="login-btn" onclick="window.location.href = 'profile.html'">View Profile</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>बचत ही है समृद्धि का <span class="highlight">मूल मंत्र</span></h1>
+        <p>Smart, digital, and inclusive solutions for every SHG!</p>
+        <div class="cta-buttons">
+            <button class="primary-btn" onclick="window.location.href='log_transactions.html'">LogIn Your
+                Transactions</button>
+            <button class="secondary-btn" onclick="window.location.href = 'termsCond.html'">Terms and
+                Conditions</button>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Empowering SHGs with Digital Solutions</h2>
+        <div class="feature-grid">
+            <div class="feature">
+                <div class="feature-img" style="background-image: url('image/i1.jpeg');"></div>
+                <div class="feature-text">
+                    <h3>Chat with SHGs</h3>
+                    <p>Connect with nearby SHGs and grow together.</p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-img" style="background-image: url('image/i2.jpeg');"></div>
+                <div class="feature-text">
+                    <h3>Peer-to-Peer Loans</h3>
+                    <p>Borrow from nearby SHGs for better financial support.</p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-img" style="background-image: url('image/i3.jpeg');"></div>
+                <div class="feature-text">
+                    <h3>Smart Business Insights</h3>
+                    <p>Track expenses and get AI-driven expansion tips.</p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-img" style="background-image: url('image/i4.jpeg');"></div>
+                <div class="feature-text">
+                    <h3>Govt Schemes</h3>
+                    <p>Discover government subsidies and funding opportunities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chatbot Icon -->
+    <div class="chatbot-icon" onclick="toggleChatbot()">
+        <img src="https://cdn.jsdelivr.net/gh/corover/assets@18June/askdisha-bucket/disha.svg" alt="Chatbot">
+    </div>
+
+    <!-- Chatbot Window -->
+    <div class="chatbot-window" id="chatbot">
+        <div class="chatbot-header">
+            सुभिक्षा
+            <button class="close-button" onclick="toggleChatbot()">×</button>
+            <button id="mic-button"
+                style="float: right; background: none; border: none; color: white; margin-right: 30px;">
+                <img src="image/mic.png" alt="Mic" style="width: 24px; height: 24px;">
+            </button>
+        </div>
+        <!-- Add microphone animation container -->
+        <div class="mic-animation" id="mic-animation">
+            <div class="mic-wave"></div>
+            <p style="margin-top: 10px;">Listening...</p>
+        </div>
+        <div class="chatbot-body" id="chat-body">
+            <p>नमस्ते! मैं आपकी कैसे मदद कर सकता हूं?</p>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 समृद्धि | Empowering Rural Entrepreneurs</p>
+    </footer>
+
+    <!-- JavaScript for Chatbot -->
+    <script>
+        function clearChat() {
+            const chatBody = document.querySelector(".chatbot-body");
+            // Keep only the first welcome message
+            chatBody.innerHTML = "<p>नमस्ते! मैं आपकी कैसे मदद कर सकता हूं?</p>";
+            // Clear input field
+            document.getElementById("chat-input").value = "";
+        }
+
+        function toggleChatbot() {
+            var chatbot = document.getElementById("chatbot");
+            if (chatbot.style.display === "flex") {
+                // When closing the chat
+                chatbot.style.display = "none";
+                clearChat();
+            } else {
+                // When opening the chat
+                chatbot.style.display = "flex";
+                clearChat();
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById("chat-input");
+            const message = input.value.trim();
+
+            if (message !== "") {
+                // Add user message to chat
+                appendMessage("You: " + message);
+                input.value = "";
+
+                try {
+                    // Send message to Flask backend
+                    const response = await fetch('http://localhost:5000/chat', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ message: message })
+                    });
+
+                    const data = await response.json();
+                    // Add bot response to chat
+                    appendMessage("Bot: " + data.response);
+                } catch (error) {
+                    console.error('Error:', error);
+                    appendMessage("Bot: Sorry, I encountered an error. Please try again.");
+                }
+            }
+        }
+
+        function appendMessage(message) {
+            const chatBody = document.querySelector(".chatbot-body");
+            const newMessage = document.createElement("p");
+            newMessage.textContent = message;
+            chatBody.appendChild(newMessage);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // Add event listener for Enter key
+        document.getElementById("chat-input").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+
+        // Updated microphone functionality
+        document.getElementById("mic-button").addEventListener("click", async function () {
+            const micAnimation = document.getElementById("mic-animation");
+            const chatBody = document.querySelector(".chatbot-body");
+
+            try {
+                // Show animation
+                micAnimation.style.display = "block";
+                chatBody.style.opacity = "0.3";
+
+                const response = await fetch('http://localhost:5000/mic', {
+                    method: 'POST'
+                });
+                const data = await response.json();
+
+                // Hide animation
+                micAnimation.style.display = "none";
+                chatBody.style.opacity = "1";
+
+                if (data.transcription && data.transcription !== "Could not understand audio") {
+                    document.getElementById("chat-input").value = data.transcription;
+                    sendMessage();
+                } else {
+                    appendMessage("System: " + (data.transcription || "Could not capture audio"));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                appendMessage("System: Error accessing microphone");
+                // Hide animation on error
+                micAnimation.style.display = "none";
+                chatBody.style.opacity = "1";
+            }
+        });
+
+        function signOut() {
+            // Clear user data from localStorage
+            localStorage.removeItem('currentUser');
+            // Redirect to main page
+            window.location.href = 'mainPage.html';
+        }
+    </script>
+</body>
+
+</html>

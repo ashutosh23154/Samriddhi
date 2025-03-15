@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Applicants - SHG</title>
+  <link rel="stylesheet" href="mainPage.css">
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="signup.css" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Full-width layout */
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem;
+      min-height: calc(100vh - 60px); /* Subtract navbar height */
+    }
+
+    /* Applicants List Grid Layout */
+    #applicants-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1200px; /* Adjust max-width as needed */
+    }
+
+    .applicant-card {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .applicant-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .applicant-card h3 {
+      font-size: 1.5rem;
+      color: #6a0dad;
+      margin-bottom: 1rem;
+    }
+
+    .applicant-card p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+
+    .applicant-card p strong {
+      color: #333;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+
+    .action-buttons button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.2s;
+    }
+
+    .accept-button {
+      background-color: #28a745;
+      color: #fff;
+    }
+
+    .accept-button:hover {
+      background-color: #218838;
+    }
+
+    .reject-button {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    .reject-button:hover {
+      background-color: #c82333;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      #applicants-list {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+      }
+    }
+
+    @media (max-width: 576px) {
+      #applicants-list {
+        grid-template-columns: 1fr; /* 1 column for small screens */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navbar -->
+  <nav>
+    <div class="logo">समृद्धि</div>
+    <ul class="nav-links">
+      <li><a href="mainPage2.html">Home</a></li>
+      <li><a href="#">Features</a></li>
+      <li><a href="selected-applicants.html">Selected Appicants</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Wrapper -->
+  <div class="wrapper">
+    <!-- Applicants List -->
+    <div class="form-container" style="width: 100%; max-width: 1200px;">
+      <h2 class="brand-logo" style="font-size: 50px;">Applicants</h2>
+
+      <!-- Applicants List -->
+      <div id="applicants-list"></div>
+    </div>
+  </div>
+
+  <!-- Link to JavaScript -->
+  <script src="applicants.js"></script>
+</body>
+</html>

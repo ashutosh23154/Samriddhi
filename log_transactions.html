@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHG Registration & Transaction Logger</title>
+
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="signup.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Kalam:wght@300;400;700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Playwrite+CU:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+    html,
+    body {
+      overflow: auto;
+      height: 100vh;
+    }
+    
+
+    .logo{
+      font-family: Kalam;
+    }
+    .left-col img {
+    width: 95%;
+    height: auto;
+    max-height: 130vh;
+    object-fit: cover;
+    border-radius: 2%;}
+
+    /* Popup Notification Styles */
+    .popup {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #4CAF50;
+      color: white;
+      padding: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+    }
+
+    .popup:hover {
+      background: #45a049;
+    }
+
+    .popup .close-btn {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .form-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .transaction-container {
+      width: 100%;
+      max-width: 450px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .transaction-container label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .transaction-container input,
+    .transaction-container select,
+    .transaction-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      /* Ensures even spacing */
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .form-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .input-group {
+      flex: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top Navbar -->
+  <nav>
+    <div class="logo">समृद्धि</div>
+    <ul class="nav-links">
+      <li><a href="mainPage2.html">Home</a></li>
+      <li><a href="#">Features</a></li>
+      <li><a href="view_transactions.html">View Transactions</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Wrapper -->
+  <div class="wrapper">
+    <!-- Left Column: Image -->
+    <div class="left-col">
+      <img src="image/i7.png" alt="SHG illustration" />
+    </div>
+
+    <!-- Right Column: Registration Form & Transaction Logger -->
+    <div class="form-container">
+      <div class="transaction-container">
+        <label for="transactionId">Transaction ID:</label>
+        <input type="text" id="transactionId" placeholder="Optional or Auto-generated" />
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" required />
+
+        <div class="form-row">
+          <div class="input-group">
+            <label for="type">Transaction Type:</label>
+            <select id="type">
+              <option value="Income">Income</option>
+              <option value="Expense">Expense</option>
+              <option value="Savings">Savings</option>
+              <option value="Loan">Loan</option>
+              <option value="Transfer">Transfer</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="paymentMode">Payment Mode:</label>
+            <select id="paymentMode">
+              <option value="Cash">Cash</option>
+              <option value="Bank Transfer">Bank Transfer</option>
+              <option value="Cheque">Cheque</option>
+              <option value="Online Payment">Online Payment</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="nature">Transaction Nature:</label>
+        <select id="nature" onchange="updateCounterpartyLabel()">
+          <option value="" disabled selected>Select one</option>
+          <option value="spent">Spent (Money Out)</option>
+          <option value="gained">Gained (Money In)</option>
+        </select>
+
+        <div id="counterpartyDiv">
+          <label id="counterpartyLabel" for="counterparty">Counterparty:</label>
+          <input type="text" id="counterparty" placeholder="Enter name/organization" />
+        </div>
+
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" required min="0.01" step="0.01" />
+
+        <label for="description">Description (optional):</label>
+        <textarea id="description" rows="3"></textarea>
+
+        <button onclick="saveTransaction()">Save Transaction</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup Notification -->
+  <div id="popup" class="popup" onclick="redirectToTransactions()">
+    <span class="close-btn" onclick="hidePopup(event)">✖</span>
+    Your transaction is saved. Tap here to view transactions.
+  </div>
+
+  <!-- External Script -->
+  <script>
+    // Initialize transactions array from localStorage or empty array
+    let transactions = [];
+
+    function updateCounterpartyLabel() {
+      const nature = document.getElementById("nature").value;
+      const counterpartyDiv = document.getElementById("counterpartyDiv");
+      const counterpartyLabel = document.getElementById("counterpartyLabel");
+
+      if (nature === "spent") {
+        counterpartyLabel.textContent = "Spent To (Receiver):";
+        counterpartyDiv.style.display = "block";
+      } else if (nature === "gained") {
+        counterpartyLabel.textContent = "Received From (Sender):";
+        counterpartyDiv.style.display = "block";
+      } else {
+        counterpartyDiv.style.display = "none";
+      }
+    }
+
+    function saveTransaction() {
+      const transactionId = document.getElementById("transactionId").value || generateTransactionId();
+      const date = document.getElementById("date").value;
+      const type = document.getElementById("type").value;
+      const paymentMode = document.getElementById("paymentMode").value;
+      const nature = document.getElementById("nature").value;
+      const counterparty = document.getElementById("counterparty").value;
+      const amount = parseFloat(document.getElementById("amount").value);
+      const description = document.getElementById("description").value;
+
+      if (!date || !nature || isNaN(amount) || amount <= 0) {
+        alert("Please fill in all required fields and ensure amount is positive.");
+        return;
+      }
+
+      if ((nature === "spent" || nature === "gained") && !counterparty) {
+        alert("Please provide the counterparty information.");
+        return;
+      }
+
+      // Get existing transactions from localStorage
+      const existingTransactions = JSON.parse(localStorage.getItem("transactions")) || [];
+      
+      // Add new transaction
+      const transaction = { 
+        transactionId, 
+        date, 
+        type, 
+        paymentMode, 
+        nature, 
+        counterparty: counterparty || "N/A", 
+        amount, 
+        description 
+      };
+      
+      existingTransactions.push(transaction);
+      
+      // Save back to localStorage
+      localStorage.setItem("transactions", JSON.stringify(existingTransactions));
+
+      // Clear form
+      document.getElementById("transactionId").value = "";
+      document.getElementById("date").value = "";
+      document.getElementById("type").selectedIndex = 0;
+      document.getElementById("paymentMode").selectedIndex = 0;
+      document.getElementById("nature").selectedIndex = 0;
+      document.getElementById("counterparty").value = "";
+      document.getElementById("amount").value = "";
+      document.getElementById("description").value = "";
+
+      showPopup();
+    }
+
+    function generateTransactionId() {
+      return 'TXN-' + Math.floor(Math.random() * 1000000);
+    }
+
+    function showPopup() {
+      const popup = document.getElementById("popup");
+      popup.style.display = "block";
+
+      setTimeout(() => {
+        popup.style.opacity = "1";
+      }, 100);
+    }
+
+    function hidePopup(event) {
+      event.stopPropagation();
+      const popup = document.getElementById("popup");
+      popup.style.opacity = "0";
+
+      setTimeout(() => {
+        popup.style.display = "none";
+      }, 300);
+    }
+
+    function redirectToTransactions() {
+      window.location.href = "view_transactions.html";
+    }
+  </script>
+</body>
+
+</html>

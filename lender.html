@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lenders - SHG</title>
+  <!-- Link to external CSS -->
+  <!-- <link rel="stylesheet" href="signup.css" /> -->
+  <link rel="stylesheet" href="mainPage.css">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Full-width layout */
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem;
+      min-height: calc(100vh - 60px); /* Subtract navbar height */
+    }
+
+    /* Lenders List Grid Layout */
+    #lenders-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1200px; /* Adjust max-width as needed */
+    }
+
+    .lender-card {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .lender-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .lender-card h3 {
+      font-size: 1.5rem;
+      color: #6a0dad;
+      margin-bottom: 1rem;
+    }
+
+    .lender-card p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+
+    .lender-card p strong {
+      color: #333;
+    }
+
+    html, body {
+      overflow: auto;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      #lenders-list {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+      }
+    }
+
+    @media (max-width: 576px) {
+      #lenders-list {
+        grid-template-columns: 1fr; /* 1 column for small screens */
+      }
+    }
+
+    .apply-button {
+      background-color: #6a0dad;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.2s;
+    }
+
+    .apply-button:hover {
+        background-color: #5a0a9d;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navbar -->
+  <nav>
+    <div class="logo">समृद्धि</div>
+    <ul class="nav-links">
+      <li><a href="mainPage2.html">Home</a></li>
+      <li><a href="borrower.html">Borrowers List</a></li>
+      <li><a href="view_transactions.html">View Transactions</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Wrapper -->
+  <div class="wrapper" style="display: flex; justify-content: center; align-items: flex-start; padding: 2rem; min-height: calc(100vh - 60px);">
+    <!-- Lenders List -->
+    <div class="form-container" style="width: 100%; max-width: 1200px;">
+      <h2 class="brand-logo">Lenders</h2>
+
+      <!-- Lenders List -->
+      <div id="lenders-list" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+        <!-- Lenders will be dynamically added here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Link to JavaScript -->
+  <script src="lenders.js"></script>
+</body>
+</html>

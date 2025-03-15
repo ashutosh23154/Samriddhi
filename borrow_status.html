@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Borrower Status - SHG</title>
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="signup.css" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Full-width layout */
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem;
+      min-height: calc(100vh - 60px); /* Subtract navbar height */
+    }
+
+    /* Status List Grid Layout */
+    #status-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1200px; /* Adjust max-width as needed */
+    }
+
+    .status-card {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .status-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .status-card h3 {
+      font-size: 1.5rem;
+      color: #6a0dad;
+      margin-bottom: 1rem;
+    }
+
+    .status-card p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+
+    .status-card p strong {
+      color: #333;
+    }
+
+    /* Status styling */
+    .status {
+      font-weight: bold;
+    }
+    .status.accepted {
+      color: #28a745;
+    }
+    .status.rejected {
+      color: #dc3545;
+    }
+    .status.pending {
+      color: #555; /* Neutral/dark gray for pending */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      #status-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 576px) {
+      #status-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    html, body {
+      overflow: auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navbar -->
+  <nav>
+    <div class="logo">समृद्धि</div>
+    <ul class="nav-links">
+      <li><a href="mainPage2.html">Home</a></li>
+      <li><a href="borrower.html">Borrowers List</a></li>
+      <li><a href="lender.html">Lenders List</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Wrapper -->
+  <div class="wrapper">
+    <!-- Status List Container -->
+    <div class="form-container" style="width: 100%; max-width: 1200px;">
+      <h2 class="brand-logo">Request Status</h2>
+      <!-- Hardcoded Status List -->
+      <div id="status-list">
+        <!-- Request 1: Green Farmers SHG (Accepted) -->
+        <div class="status-card">
+          <h3>Green Farmers SHG</h3>
+          <p><strong>Leader’s Name:</strong> Ramesh Kumar</p>
+          <p><strong>Contact:</strong> 9876543210</p>
+          <p><strong>Email:</strong> ramesh@greenfarmers.com</p>
+          <p><strong>Business:</strong> Agriculture</p>
+          <p><strong>Amount:</strong> ₹50,000</p>
+          <p><strong>Status:</strong> <span class="status accepted">Accepted</span></p>
+        </div>
+        <!-- Request 2: Handicraft Artisans SHG (Rejected) -->
+        <div class="status-card">
+          <h3>Handicraft Artisans SHG</h3>
+          <p><strong>Leader’s Name:</strong> Sunita Devi</p>
+          <p><strong>Contact:</strong> 8765432109</p>
+          <p><strong>Email:</strong> sunita@handicraftartisans.com</p>
+          <p><strong>Business:</strong> Handicrafts</p>
+          <p><strong>Amount:</strong> ₹20,000</p>
+          <p><strong>Status:</strong> <span class="status rejected">Rejected</span></p>
+        </div>
+        <!-- Request 3: Dairy Farmers SHG (Pending) -->
+        <div class="status-card">
+          <h3>Dairy Farmers SHG</h3>
+          <p><strong>Leader’s Name:</strong> Mohan Singh</p>
+          <p><strong>Contact:</strong> 7654321098</p>
+          <p><strong>Email:</strong> mohan@dairyfarmers.com</p>
+          <p><strong>Business:</strong> Dairy</p>
+          <p><strong>Amount:</strong> ₹75,000</p>
+          <p><strong>Status:</strong> <span class="status pending">Pending</span></p>
+        </div>
+        <!-- Request 4: Textile Weavers SHG (Pending) -->
+        <div class="status-card">
+          <h3>Textile Weavers SHG</h3>
+          <p><strong>Leader’s Name:</strong> Anita Sharma</p>
+          <p><strong>Contact:</strong> 6543210987</p>
+          <p><strong>Email:</strong> anita@textileweavers.com</p>
+          <p><strong>Business:</strong> Textiles</p>
+          <p><strong>Amount:</strong> ₹30,000</p>
+          <p><strong>Status:</strong> <span class="status pending">Pending</span></p>
+        </div>
+        <!-- Request 5: Organic Farmers SHG (Pending) -->
+        <div class="status-card">
+          <h3>Organic Farmers SHG</h3>
+          <p><strong>Leader’s Name:</strong> Rajesh Patel</p>
+          <p><strong>Contact:</strong> 5432109876</p>
+          <p><strong>Email:</strong> rajesh@organicfarmers.com</p>
+          <p><strong>Business:</strong> Agriculture</p>
+          <p><strong>Amount:</strong> ₹25,000</p>
+          <p><strong>Status:</strong> <span class="status pending">Pending</span></p>
+        </div>
+        <!-- Request 6: Pottery Makers SHG (Pending) -->
+        <div class="status-card">
+          <h3>Pottery Makers SHG</h3>
+          <p><strong>Leader’s Name:</strong> Priya Verma</p>
+          <p><strong>Contact:</strong> 4321098765</p>
+          <p><strong>Email:</strong> priya@potterymakers.com</p>
+          <p><strong>Business:</strong> Handicrafts</p>
+          <p><strong>Amount:</strong> ₹40,000</p>
+          <p><strong>Status:</strong> <span class="status pending">Pending</span></p>
+        </div>
+        <!-- Request 7: Fishermen SHG (Pending) -->
+        <div class="status-card">
+          <h3>Fishermen SHG</h3>
+          <p><strong>Leader’s Name:</strong> Vijay Kumar</p>
+          <p><strong>Contact:</strong> 3210987654</p>
+          <p><strong>Email:</strong> vijay@fishermen.com</p>
+          <p><strong>Business:</strong> Fisheries</p>
+          <p><strong>Amount:</strong> ₹15,000</p>
+          <p><strong>Status:</strong> <span class="status pending">Pending</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

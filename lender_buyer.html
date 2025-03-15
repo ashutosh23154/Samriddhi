@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHG Platform - Empowering Rural Businesses</title>
+    <link rel="stylesheet" href="mainPage.css">
+    <style>
+        /* Main Section */
+        .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+            gap: 40px;
+        }
+
+        /* Left Section */
+        .left-container {
+            width: 45%;
+            text-align: center;
+        }
+
+        .left-container h1 {
+            margin-bottom: 20px;
+            font-size: 65px;
+            font-family: 'Comic Neue', 'Poppins', sans-serif;
+            margin-top: 0;
+        }
+
+        .box-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .box {
+            width: 200px;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            border: 2px solid #6a0dad;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .box:hover {
+            background: #6a0dad;
+            color: white;
+        }
+
+        /* Right Section */
+        .right-container {
+            width: 45%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .right-container img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+        }
+        .box-container a{
+            text-decoration: none;
+            color: rgb(41, 40, 40);
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            padding: 15px;
+            font-size: 14px;
+            margin-top: 0px;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">समृद्धि</div>
+        <ul class="nav-links">
+            <li><a href="mainPage2.html">Home</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <button class="login-btn" onclick = "window.location.href = 'profile.html'">View Profile</button>
+    </nav>
+
+    <!-- Main Section -->
+    <section class="main-container">
+        <!-- Left Section -->
+        <div class="left-container">
+            <h1>Choose an option</h1>
+            <div class="box-container">
+                    <a href="lender.html" class="box">See Lenders List</a>
+                    <a href="borrower.html" class="box">See Borrowers List</a>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-container">
+            <img src="image/i1.jpeg" alt="SHG Platform">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 समृद्धि | Empowering Rural Entrepreneurs</p>
+    </footer>
+
+</body>
+
+</html>
