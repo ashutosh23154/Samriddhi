@@ -2,7 +2,7 @@ import google.generativeai as genai
 from deep_translator import GoogleTranslator
 import json
 
-GOOGLE_API_KEY = "AIzaSyCDvB_-WOlpKq2n_FkizSiZLPAo0UdjiQE"  # Replace with your actual API key
+GOOGLE_API_KEY = "YOUR_GEMINI_API_KEY"  # Replace with your actual API key
 genai.configure(api_key=GOOGLE_API_KEY)
 
 # Initialize the Gemini model
